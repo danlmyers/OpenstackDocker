@@ -1,0 +1,16 @@
+version: '2'
+services:
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=password123
+      - MYSQL_DATABASE=keystone
+      - MYSQL_USER=keystone
+      - MYSQL_PASSWORD=keystone
+  keystone:
+    build: ./keystone
+    command: /root/bootstrap.sh
+    depends_on:
+      - db
+    links:
+      - db
